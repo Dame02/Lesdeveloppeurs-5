@@ -1,0 +1,64 @@
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+
+function HomePage() {
+  const [buttons, setButtons] = useState([]);
+
+  const addButton = () => {
+    setButtons([...buttons, `Bouton Dynamique ${buttons.length + 1}`]);
+  };
+
+  return (
+    <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center">
+      <header className="text-center mb-10">
+        <h1 className="text-4xl font-bold text-gray-800">
+          Bienvenue sur notre page d'accueil
+        </h1>
+        <p className="text-lg text-gray-600 mt-4">
+          Explorez nos fonctionnalités dynamiques avec des animations interactives.
+        </p>
+      </header>
+
+      <button
+        onClick={addButton}
+        className="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-lg hover:bg-blue-700 transition-colors mb-6"
+      >
+        Ajouter un Bouton
+      </button>
+
+      <div className="flex flex-wrap gap-6 justify-center">
+        {buttons.map((buttonText, index) => (
+          <motion.button
+            key={index}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            className="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-lg hover:bg-blue-700 transition-colors"
+            onClick={() => alert(`${buttonText} Cliqué!`)}
+          >
+            {buttonText}
+          </motion.button>
+        ))}
+      </div>
+
+      <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-4 max-w-5xl">
+        {["Service 1", "Service 2", "Service 3", "Service 4", "Service 5", "Service 6"].map(
+          (service, index) => (
+            <motion.div
+              key={index}
+              whileHover={{ scale: 1.05 }}
+              className="bg-white rounded-lg shadow-lg p-6 hover:shadow-2xl transition-shadow"
+            >
+              <h2 className="text-2xl font-bold text-gray-800">{service}</h2>
+              <p className="text-gray-600 mt-2">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
+                nec odio. Praesent libero. Sed cursus ante dapibus diam.
+              </p>
+            </motion.div>
+          )
+        )}
+      </div>
+    </div>
+  );
+}
+
+export default HomePage;
